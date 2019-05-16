@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% if posts %}
+    {% for post in posts %}
+        <article class= '{% if not post.active %}archived-{% endif %}blog-post' >
+            <span class='post-title'>
+                <a href = '/blog?id={{post.id}}' class ='post-title' >{{ post.title }} </a>
+            </span> 
+            <span class='post-date'>{{ post.post_date }}</span><br>
+            {% if not post.active %}<p>(this post is archived)</p>{% endif %}
+            <div class='post-body'>
+                {{ post.body }}
+            </div>
+            <div>
+                <span class='post-date' >
+                    posted by: 
+                    <a href='blog?user={{post.owner.username}}'>
+                        {{ post.owner.username }}
+                    </a>
+                    </span>
+            </div>
+
+            <!--
+            <form class = 'archive-toggle' acion='/blog' method='POST'>
+                <input type='hidden' name = 'post-id' value = '{{ post.id }}' />
+                {% if post.active %}
+                <input type='submit' value='Archive' />
+                {% else %}
+                <input type='submit' value='Unarchive' />
+                {% endif %}
+            </form>
+            -->
+        </article>
+    {% endfor %}
+{% else %}
+    <p> There are no posts here. </p>
+{% endif %}
+
+{% endblock %}

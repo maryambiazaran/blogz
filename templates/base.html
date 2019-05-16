@@ -1,0 +1,46 @@
+<!DOCTYPE html> 
+<html>
+    <head>
+        <link rel='stylesheet' type='text/css' href="{{ url_for('static', filename='style.css') }}" />
+        <title> :: Welcome to Blogz! ::   </title>
+        <!--
+            <script src="https://cloud.tinymce.com/5/tinymce.min.js"></script>
+            <script>tinymce.init({selector:'textarea'});</script>
+        -->
+    </head>
+    <nav>
+        {% if 'username' in session %}
+            <span> Welcome, {{session['username']}}! </span> | 
+            <a href='/logout'> Log Out </a> 
+        {% else %}
+            <a href='/login'> Login </a> 
+        {% endif %}
+        <br><br>
+        <a href='/blog'> All Blogs </a> | 
+        <a href='/'> All Bloggers </a> | 
+        <a href='/newpost'>New Post </a>
+        {% if 'username' in session %}
+            | <a href="/blog?user={{session['username']}}"> My Blog </a> 
+        {% endif %}
+        
+        
+    </nav>
+    <body>
+        <h1> <a href='/'>Blogz</a> </h1><hr>
+        {% with messages=get_flashed_messages(category_filter=["info"]) %}
+        {% if messages %}
+            {% for message in messages %}
+                <p class = 'flashes'> {{ message }} </p>
+            {% endfor %}
+        {% endif %}
+        {% endwith %}
+        
+        {% block content %}
+
+        {% endblock %}
+
+
+
+    </body>
+
+</html>

@@ -1,0 +1,131 @@
+
+html{
+    background-image: url('https://monteverdy.files.wordpress.com/2015/02/the-background-fairy-blog-background-simple-and-chic-natural2.jpg');
+    background-attachment: fixed;
+    background-position: top;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+body{
+    width: 75vw;
+    min-height: 120vh;
+    max-width: 1024px;
+    min-width: 500px;
+    padding: 30px 1em;
+	margin: 0 auto;
+    background-color:rgba(250, 250, 250);
+    font-family: Palatino;
+
+}
+
+h1 {
+    color: auto
+}
+
+nav {
+    text-align: right;
+    padding: 1em 0;
+    
+}
+
+a {
+    text-decoration: None;
+    color: rgb(48, 18, 1);
+    font-family: palatino;
+}
+
+nav a {
+    
+    text-decoration: None;
+    color: rgb(48, 18, 1);
+    font-family: palatino;
+    margin: 0 0.5em
+  
+
+}
+
+
+
+
+.textfield {
+    margin-bottom: 1em;
+    width: 60vw;
+}
+
+textarea {
+    margin-bottom: 1em;
+    width: 60vw;
+    height: 15em
+}
+
+.blog-post {
+    width: 70vw;
+    background-color: #eeeded;
+    border-radius: 10px;
+    padding: 20px;
+    margin: 20px auto
+}
+
+.archived-blog-post {
+    width: 70vw;
+    background-color: #eeeded;
+    border-radius: 10px;
+    padding: 10px;
+    margin: 10px auto;
+    color: rgba(0, 0, 0, 0.438)
+}
+.archived-blog-post p {
+    font-style: italic;
+    font-size: smaller;
+    line-height: 0;
+    color: maroon
+
+}
+
+.post-date {
+    font-size: smaller;
+    float: right;
+    color: grey;
+    font-style: italic;
+    padding:0;
+}
+
+.post-title {
+    float: left;
+    font-size: large;
+    font-weight: bold;
+    line-height: 1em;
+    Color: rgb(46, 46, 46);
+    text-decoration: None;
+
+}
+
+.post-body {
+    margin: 1em
+}
+
+.page-title {
+    
+    font-size: larger;
+    font-weight: bold;
+    line-height: 2em
+}
+
+#archive-title {
+    font-size: larger;
+    font-weight: bold;
+    line-height: 2em;
+    font-style: italic;
+    color: maroon;
+    background-color: rgba(255, 204, 204, 0.507);
+    text-align: center
+}
+
+.flashes {
+    font-size: small;
+    line-height: 1em;
+    font-style: italic;
+    color: rgb(0, 0, 0);
+    background-color: rgb(245, 198, 167);
+    text-align: center
+}

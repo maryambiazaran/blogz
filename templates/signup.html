@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div>
+    <form action='/signup' method='POST'>
+        <table>
+            <tr>
+                <td>Username:</td>
+                <td><input type='text' name='username' value='{{username}}'/></td>
+                <td>
+                    {% with messages = get_flashed_messages(category_filter=["username"]) %}
+                        {% if messages %}
+                            {% for message in messages %}    
+                                <span class='flashes'> {{message}} </span>
+                            {% endfor %}
+                        {% endif %}
+                    {% endwith %}
+                </td>
+            </tr>
+            <tr>
+                <td>Password:</td>
+                <td><input type='password' name='password'/></td>
+                <td>
+                    {% with messages = get_flashed_messages(category_filter=["password"]) %}
+                        {% if messages %}
+                            {% for message in messages %}    
+                                <span class='flashes'> {{message}} </span>
+                            {% endfor %}
+                        {% endif %}
+                    {% endwith %}
+                    </td>
+            </tr>
+            <tr>
+                <td>Verify Password:</td>
+                <td><input type='password' name='verify'/></td>
+                <td>
+                    {% with messages = get_flashed_messages(category_filter=["verify"]) %}
+                        {% if messages %}
+                            {% for message in messages %}    
+                                <span class='flashes' > {{message}} </span>
+                            {% endfor %}
+                        {% endif %}
+                    {% endwith %}
+                    </td>
+            </tr>
+        </table>
+        <input type='submit' value='Register' />
+
+    </form>
+</div>
+
+{% endblock %}

@@ -3,7 +3,10 @@ from models import Blog, User
 from flask import render_template, request, redirect, flash, url_for, session
 from datetime import datetime,timedelta
 
- # ==================== R A N D O M    F U N C T I O N S =========================   
+# ================================================================================   
+# ==================== R A N D O M    F U N C T I O N S ==========================
+# ================================================================================   
+   
 def get_active_posts(user=None):
     if user is None:
         return Blog.query.filter_by(active=True).order_by(-Blog.id).all()
@@ -13,28 +16,32 @@ def get_active_posts(user=None):
 def get_inactive_posts():
     return Blog.query.filter_by(active=False).order_by(-Blog.id).all()
 
- # ================================================================================   
-
-# Filter requests when user tries to make a "NEW POST" i.e. /newpost
+# ================================================================================   
+# Force user to login before making a NEW POST
 @app.before_request
 def logincheck():
     protected_path = ['/newpost']
     if 'username' not in session and request.path in protected_path:
         return redirect('/login')
 
- # ================================================================================   
+# ================================================================================   
 @ app.route('/')
 def index():
+    # Display a list of all bloggers
     all_users = User.query.all()
     return render_template('index.html', users = all_users)
 
 @ app.route('/logout')
 def logout():
+    # Return to '/' after logout
     del session['username']
     return redirect('/')
 
 @app.route('/login', methods = ['GET','POST'])
 def login():
+    # POST >> Verify the login form
+    # SUCCESSFUL ---> Send user to blog/user=...
+    # FAIL ---> ask user login again
     if request.method == 'POST':
         login_username = request.form['username']
         login_password = request.form['password']
@@ -46,6 +53,7 @@ def login():
         else:
             flash('Invalid username and/or password.','info')
             return redirect('')
+    # GET >> render the login form
     else:
         return render_template('login.html')
 
@@ -53,6 +61,9 @@ def login():
 
 @app.route('/signup', methods=['POST','GET'])
 def signup():
+    # POST >> Verify the signup form
+    # SUCCESSFUL ---> Log the user in and send them to NEW POST!
+    # FAIL ---> show the sign-up form again
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
@@ -77,7 +88,6 @@ def signup():
             # add the username to the session
             session['username']= username
             # send the new_user to /new_post
-
             return render_template('newpost.html')
         
         # this will probably not run at all!
@@ -90,9 +100,9 @@ def signup():
 @app.route('/blog',methods=['GET'])
 # This needs to be able to handle
 
-#   /blog                   will show all the posts
-#   /blog?user=user_x       will show all user's posts
-#   /blog?id=000000         will show a certain blog with that id
+#   /blog                will show all the posts
+#   /blog?user=...       will show all user's posts
+#   /blog?id=...         will show a certain blog with that id
 
 def blog():
     # Handling different GET requests
@@ -131,6 +141,9 @@ def blog():
 
 @app.route('/newpost', methods=['GET','POST'])
 def new_post():
+    # POST >> Verify the NEW POST form
+    # SUCCESSFUL ---> Send user to see the new published blog
+    # FAIL ---> ask user login again
     if request.method == 'POST':
         title = request.form['title']
         body = request.form['body']
@@ -147,6 +160,7 @@ def new_post():
             flash('Your blog needs both "title" and some "text"','info')
             return render_template('newpost.html', title=title, body=body)
     else:
+        # GET >> ask user to enter values for both fields
         return render_template('newpost.html')
 
  # ================================================================================   

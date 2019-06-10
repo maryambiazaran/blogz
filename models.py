@@ -2,6 +2,10 @@ from app import db
 from datetime import datetime,timedelta
 from hashutils import check_pw_hash,make_pw_hash
 
+# =====================================================
+# ==================== B L O G ========================
+# =====================================================
+
 class Blog(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(120))
@@ -20,6 +24,11 @@ class Blog(db.Model):
 
     def __repr__(self):
         return '< Title:"{}" ,date posted: {}>'.format(self.title,str(self.date)[:16])
+
+
+# =====================================================
+# ==================== U S E R ========================
+# =====================================================
 
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
